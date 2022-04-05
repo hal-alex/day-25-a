@@ -26,7 +26,8 @@ correct_guesses = []
 check = all(item in correct_guesses for item in all_of_states)
 
 while check == False:
-    user_answer = screen.textinput(title=f"Guess a US state - {len(correct_guesses)}/{len(all_of_states)}", prompt="Type in below a US state you can think of").title()
+    user_answer = screen.textinput(title=f"Guess a US state - {len(correct_guesses)}/{len(all_of_states)}",
+                                   prompt="Type in below a US state you can think of").title()
     check = all(item in correct_guesses for item in all_of_states)
     for state in list_of_states:
         if user_answer == state:
