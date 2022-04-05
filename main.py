@@ -1,5 +1,6 @@
 import turtle
 import pandas
+from turtle_state import Turtle_state
 
 # Steps:
 # Convert the guess to title case
@@ -17,6 +18,7 @@ turtle.addshape(image)
 turtle.shape(image)
 
 
+
 user_answer = screen.textinput(title="Guess a US state", prompt="Type in below a US state you can think of").title()
 
 print(user_answer)
@@ -27,17 +29,15 @@ list_of_states = all_of_states["state"].to_list()
 
 print(list_of_states)
 
+correct_guesses = []
+
 for state in list_of_states:
     if user_answer == state:
-        x_coor = all_of_states.query(f"{state}")["x"]
-        print(x_coor)
-        turtle.write(state)
-
-
-
-
-
-
+        x_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "x"])
+        y_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "y"])
+        Turtle_state(state, x_cor, y_cor)
+        user_answer = screen.textinput(title="Guess a US state",
+                                       prompt="Type in below a US state you can think of").title()
 
 
 
