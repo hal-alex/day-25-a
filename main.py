@@ -17,27 +17,25 @@ image = "blank_states_img.gif"
 turtle.addshape(image)
 turtle.shape(image)
 
-
-
-user_answer = screen.textinput(title="Guess a US state", prompt="Type in below a US state you can think of").title()
-
-print(user_answer)
-
 all_of_states = pandas.read_csv("50_states.csv")
 
 list_of_states = all_of_states["state"].to_list()
 
-print(list_of_states)
-
 correct_guesses = []
 
-for state in list_of_states:
-    if user_answer == state:
-        x_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "x"])
-        y_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "y"])
-        Turtle_state(state, x_cor, y_cor)
-        user_answer = screen.textinput(title="Guess a US state",
-                                       prompt="Type in below a US state you can think of").title()
+check = all(item in correct_guesses for item in all_of_states)
+
+while check == False:
+    user_answer = screen.textinput(title=f"Guess a US state - {len(correct_guesses)}/{len(all_of_states)}", prompt="Type in below a US state you can think of").title()
+    check = all(item in correct_guesses for item in all_of_states)
+    for state in list_of_states:
+        if user_answer == state:
+            x_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "x"])
+            y_cor = int(all_of_states.loc[all_of_states.state == f"{state}", "y"])
+            Turtle_state(state, x_cor, y_cor)
+            correct_guesses.append(state)
+
+
 
 
 
